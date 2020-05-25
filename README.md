@@ -53,7 +53,7 @@ sam deploy --template-file packaged.yaml --stack-name aws-workshop --capabilitie
 * [AWS CLI](https://aws.amazon.com/cli/)
 
 ```
-aws cloudformation create-stack --stack-name aws-workshop --template-body file://cfn_template.yaml --capabilities CAPABILITY_NAMED_IAM
+aws cloudformation create-stack --stack-name aws-workshop --template-body file://cfn_template.json --capabilities CAPABILITY_NAMED_IAM
 ```
 
 * API GW URL is present as a Cloudformation output
