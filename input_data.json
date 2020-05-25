@@ -1,0 +1,22 @@
+[
+    {
+        "title": "Java fundamentals",
+        "desc": "Learning java",
+        "courseid": "ENSF607"
+    },
+    {
+        "title": "Python fundamentals",
+        "desc": "Learning python",
+        "courseid": "ENSF609"
+    },
+    {
+        "title": "Javascript fundamentals",
+        "desc": "Learning javascript",
+        "courseid": "ENSF639"
+    },
+    {
+        "title": "C++ fundamentals",
+        "desc": "learning C++",
+        "courseid": "ENSF683"
+    }
+]

@@ -1,0 +1,43 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: AWS Workshop
+Outputs:
+  GithubHandlerApiURL:
+    Description: "API dev stage endpoint"
+    Value: !Sub "https://${ApiGatewayApi}.execute-api.${AWS::Region}.amazonaws.com/dev/getcourses"
+Resources:
+  ApiGatewayApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: dev
+  dynamodbgetfunction:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.7
+      CodeUri: .
+      Description: get items from dynamodb
+      MemorySize: 128
+      Timeout: 5
+      Role: !GetAtt LambdaDynamoDBRole.Arn
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /getcourses
+            Method: get
+            RestApiId:
+              Ref: ApiGatewayApi
+  LambdaDynamoDBRole:
+    Type: AWS::IAM::Role
+    Properties: 
+      AssumeRolePolicyDocument: {"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"Service":"lambda.amazonaws.com"},"Action":"sts:AssumeRole"}]}
+      Description: This role allows the lambda function to read data from dynamodb and publish logs to Cloudwatch logs
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonDynamoDBReadOnlyAccess
+        - arn:aws:iam::aws:policy/CloudWatchLogsFullAccess
+      RoleName: !Sub LambdaDynamoDBRole-${AWS::Region}
+
+
+
+  

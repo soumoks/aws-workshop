@@ -1,0 +1,5 @@
+*.pyo
+*.pyc
+.vscode/*
+.aws-sam/*
+packaged.yaml
