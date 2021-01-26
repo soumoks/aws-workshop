@@ -12,11 +12,12 @@ def lambda_handler(event, context):
     table_name = 'courses'
     table = dynamodb.Table(table_name)
     logger.info("Connected to DynamoDB.")
-
     try:
-        course_id = str(event['courseid'])
+        course_id = str(event['pathParameters']['courseid'])
     except:
         course_id = ""
+
+    logger.info(f"courseid: {course_id}")
 
     if course_id.lower() == "all":
         #return all courses
